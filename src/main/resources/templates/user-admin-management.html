@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestion des Utilisateurs et Administrateurs</title>
+    
+    <!-- Inclure Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Gestion des Utilisateurs et Administrateurs</h1>
+
+    <!-- Section Utilisateurs -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Liste des Utilisateurs</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td ><span th:utext="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td>
+                        <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/users/add" class="btn btn-success">Ajouter Utilisateur</a>
+        </div>
+    </div>
+
+    <!-- Section Administrateurs -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Liste des Administrateurs</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="admin : ${admins}">
+                    <td th:text="${admin.id}"></td>
+                    <td th:text="${admin.name}"></td>
+                    <td th:text="${admin.email}"></td>
+                    <td>
+                        <a th:href="@{/admins/edit/{id}(id=${admin.id})}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a th:href="@{/admins/delete/{id}(id=${admin.id})}" class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet administrateur ?')">Supprimer</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/admins/add" class="btn btn-success">Ajouter Administrateur</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Inclure Bootstrap JS et ses dépendances -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
